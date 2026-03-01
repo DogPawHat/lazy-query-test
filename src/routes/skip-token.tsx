@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery, skipToken } from "@tanstack/react-query";
+import { Loader2 } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { fetchPostById } from "../lib/api";
 import { QueryStateInspector } from "../components/QueryStateInspector";
@@ -95,7 +96,13 @@ const result = useQuery({
             )}
         </div>
 
-        {result.isSuccess && result.data && (
+        {result.isFetching && (
+          <div className="flex items-center justify-center py-8">
+            <Loader2 className="h-8 w-8 animate-spin text-(--lagoon)" />
+          </div>
+        )}
+
+        {!result.isFetching && result.isSuccess && result.data && (
           <div className="island-shell rounded-xl p-4">
             <h3
               className="mb-3 text-sm font-semibold tracking-wide uppercase"
