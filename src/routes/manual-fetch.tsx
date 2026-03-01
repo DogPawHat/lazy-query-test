@@ -64,7 +64,7 @@ result.refetch()`}</pre>
                   className="flex items-center gap-2 text-sm text-(--sea-ink)"
                 >
                   <span
-                    className="inline-block h-4 w-4 flex-shrink-0 rounded border"
+                    className="inline-block h-4 w-4 shrink-0 rounded border"
                     style={{
                       backgroundColor: todo.completed
                         ? "var(--lagoon)"
