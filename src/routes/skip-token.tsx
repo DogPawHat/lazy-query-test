@@ -16,6 +16,7 @@ function SkipTokenDemo() {
   const result = useQuery({
     queryKey: ["post", postId],
     queryFn: postId ? () => fetchPostById(postId) : skipToken,
+    retry: false,
   });
 
   const showSpinner = useThrottledLoading(result.isFetching);
