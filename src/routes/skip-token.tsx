@@ -10,6 +10,12 @@ export const Route = createFileRoute('/skip-token')({
 
 function SkipTokenDemo() {
   const [postId, setPostId] = useState<number | null>(null)
+  const [refetchError, setRefetchError] = useState<string | null>(null)
+  const [prevPostId, setPrevPostId] = useState(postId)
+  if (postId !== prevPostId) {
+    setPrevPostId(postId)
+    setRefetchError(null)
+  }
 
   const result = useQuery({
     queryKey: ['post', postId],
@@ -79,6 +85,27 @@ const result = useQuery({
           <QueryStateInspector result={result} />
         </div>
 
+        <div className="mb-6">
+          <button
+            onClick={async () => {
+              setRefetchError(null)
+              try {
+                await result.refetch()
+              } catch (err) {
+                setRefetchError(err instanceof Error ? err.message : String(err))
+              }
+            }}
+            className="rounded-lg border border-[var(--line)] bg-[var(--surface)] px-4 py-2 text-sm font-medium text-[var(--sea-ink)] transition hover:bg-[var(--link-bg-hover)]"
+          >
+            Try refetch()
+          </button>
+          {refetchError && (
+            <p className="mt-2 text-sm text-red-500">
+              Error: {refetchError}
+            </p>
+          )}
+        </div>
+
         {result.isSuccess && result.data && (
           <div className="island-shell rounded-xl p-4">
             <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide" style={{ color: 'var(--kicker)' }}>
@@ -104,7 +131,8 @@ const result = useQuery({
               Unlike enabled: false, skipToken works at the queryFn level
             </li>
             <li>
-              <code>refetch()</code> is a no-op when skipToken is active
+              <code>refetch()</code> throws "Missing queryFn" error when skipToken
+              is active (use enabled: false if you need manual refetch)
             </li>
             <li>
               fetchStatus will be "idle" when skipped, status stays in previous
