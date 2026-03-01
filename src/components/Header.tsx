@@ -57,27 +57,26 @@ export default function Header() {
             Home
           </Link>
           <Link
-            to="/blog"
+            to="/manual-fetch"
             className="nav-link"
             activeProps={{ className: 'nav-link is-active' }}
           >
-            Blog
+            Manual Fetch
           </Link>
           <Link
-            to="/about"
+            to="/conditional-query"
             className="nav-link"
             activeProps={{ className: 'nav-link is-active' }}
           >
-            About
+            Conditional Query
           </Link>
-          <a
-            href="https://tanstack.com/start/latest/docs/framework/react/overview"
+          <Link
+            to="/skip-token"
             className="nav-link"
-            target="_blank"
-            rel="noreferrer"
+            activeProps={{ className: 'nav-link is-active' }}
           >
-            Docs
-          </a>
+            Skip Token
+          </Link>
         </div>
       </nav>
     </header>
