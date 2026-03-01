@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useDebouncedValue } from "@tanstack/react-pacer";
 import { Loader2 } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { fetchUsers } from "../lib/api";
 import { QueryStateInspector } from "../components/QueryStateInspector";
+import { useThrottledLoading } from "../hooks/useThrottledLoading";
 
 export const Route = createFileRoute("/conditional-query")({
   component: ConditionalQueryDemo,
@@ -11,12 +13,15 @@ export const Route = createFileRoute("/conditional-query")({
 
 function ConditionalQueryDemo() {
   const [search, setSearch] = useState("");
+  const [debouncedSearch] = useDebouncedValue(search, { wait: 300 });
 
   const result = useQuery({
-    queryKey: ["users", search],
-    queryFn: () => fetchUsers(search),
-    enabled: !!search,
+    queryKey: ["users", debouncedSearch],
+    queryFn: () => fetchUsers(debouncedSearch),
+    enabled: !!debouncedSearch,
   });
+
+  const showSpinner = useThrottledLoading(result.isFetching);
 
   return (
     <main className="page-wrap px-4 pt-14 pb-8">
@@ -33,11 +38,12 @@ function ConditionalQueryDemo() {
 
         <div className="mb-6 overflow-x-auto rounded-lg bg-slate-900 p-4 text-sm text-slate-100">
           <pre>{`const [search, setSearch] = useState('')
+const [debouncedSearch] = useDebouncedValue(search, { wait: 300 })
 
 const result = useQuery({
-  queryKey: ['users', search],
-  queryFn: () => fetchUsers(search),
-  enabled: !!search,  // Only fetch when search has a value
+  queryKey: ['users', debouncedSearch],
+  queryFn: () => fetchUsers(debouncedSearch),
+  enabled: !!debouncedSearch,  // Only fetch when debounced value exists
 })`}</pre>
         </div>
 
@@ -53,7 +59,7 @@ const result = useQuery({
             className="w-full rounded-lg border border-(--line) bg-(--surface) px-4 py-2.5 text-sm text-(--sea-ink) placeholder:text-(--sea-ink-soft) focus:border-(--lagoon) focus:outline-none"
           />
           <p className="mt-2 text-xs text-(--sea-ink-soft)">
-            Query is {search ? "enabled" : "disabled"} (enabled: {!!search})
+            Query is {debouncedSearch ? "enabled" : "disabled"} (enabled: {!!debouncedSearch})
           </p>
         </div>
 
@@ -61,13 +67,13 @@ const result = useQuery({
           <QueryStateInspector result={result} />
         </div>
 
-        {result.isFetching && (
+        {showSpinner && (
           <div className="flex items-center justify-center py-8">
             <Loader2 className="h-8 w-8 animate-spin text-(--lagoon)" />
           </div>
         )}
 
-        {!result.isFetching && result.isSuccess && result.data && (
+        {!showSpinner && result.isSuccess && result.data && (
           <div className="island-shell rounded-xl p-4">
             <h3
               className="mb-3 text-sm font-semibold tracking-wide uppercase"
