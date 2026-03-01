@@ -20,10 +20,10 @@ function SkipTokenDemo() {
     <main className="page-wrap px-4 pt-14 pb-8">
       <section className="island-shell rise-in rounded-[2rem] p-8">
         <p className="island-kicker mb-2">Pattern 3</p>
-        <h1 className="display-title mb-4 text-3xl font-bold text-[var(--sea-ink)]">
+        <h1 className="display-title mb-4 text-3xl font-bold text-(--sea-ink)">
           Skip Token for Declarative Skipping
         </h1>
-        <p className="mb-6 text-[var(--sea-ink-soft)]">
+        <p className="mb-6 text-(--sea-ink-soft)">
           Use <code>skipToken</code> to declaratively skip queries when data is missing. Unlike
           enabled: false, skipToken is a value that can be passed to queryFn.
         </p>
@@ -40,7 +40,7 @@ const result = useQuery({
         </div>
 
         <div className="mb-6">
-          <label className="mb-2 block text-sm font-medium text-[var(--sea-ink)]">
+          <label className="mb-2 block text-sm font-medium text-(--sea-ink)">
             Select Post ID
           </label>
           <div className="flex flex-wrap gap-2">
@@ -60,12 +60,12 @@ const result = useQuery({
             ))}
             <button
               onClick={() => setPostId(null)}
-              className="rounded-lg border border-[var(--line)] bg-[var(--surface)] px-3 py-1.5 text-sm font-medium text-[var(--sea-ink)] transition hover:bg-[var(--link-bg-hover)]"
+              className="rounded-lg border border-(--line) bg-(--surface) px-3 py-1.5 text-sm font-medium text-(--sea-ink) transition hover:bg-(--link-bg-hover)"
             >
               Clear
             </button>
           </div>
-          <p className="mt-2 text-xs text-[var(--sea-ink-soft)]">
+          <p className="mt-2 text-xs text-(--sea-ink-soft)">
             {postId ? `Selected post ${postId}` : "No post selected (using skipToken)"}
           </p>
         </div>
@@ -79,7 +79,7 @@ const result = useQuery({
             onClick={() => {
               void result.refetch();
             }}
-            className="rounded-lg border border-[var(--line)] bg-[var(--surface)] px-4 py-2 text-sm font-medium text-[var(--sea-ink)] transition hover:bg-[var(--link-bg-hover)]"
+            className="rounded-lg border border-(--line) bg-(--surface) px-4 py-2 text-sm font-medium text-(--sea-ink) transition hover:bg-(--link-bg-hover)"
           >
             Try refetch()
           </button>
@@ -96,14 +96,14 @@ const result = useQuery({
             >
               Post #{result.data.id}
             </h3>
-            <h4 className="mb-2 font-semibold text-[var(--sea-ink)]">{result.data.title}</h4>
-            <p className="text-sm text-[var(--sea-ink-soft)]">{result.data.body}</p>
+            <h4 className="mb-2 font-semibold text-(--sea-ink)">{result.data.title}</h4>
+            <p className="text-sm text-(--sea-ink-soft)">{result.data.body}</p>
           </div>
         )}
 
-        <div className="mt-6 rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4">
-          <h4 className="mb-2 text-sm font-semibold text-[var(--sea-ink)]">Key Insights</h4>
-          <ul className="list-disc space-y-1 pl-4 text-xs text-[var(--sea-ink-soft)]">
+        <div className="mt-6 rounded-lg border border-(--line) bg-(--surface) p-4">
+          <h4 className="mb-2 text-sm font-semibold text-(--sea-ink)">Key Insights</h4>
+          <ul className="list-disc space-y-1 pl-4 text-xs text-(--sea-ink-soft)">
             <li>
               <code>skipToken</code> is a special value that tells React Query to skip this query
             </li>

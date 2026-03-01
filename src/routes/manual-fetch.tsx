@@ -18,10 +18,10 @@ function ManualFetchDemo() {
     <main className="page-wrap px-4 pt-14 pb-8">
       <section className="island-shell rise-in rounded-[2rem] p-8">
         <p className="island-kicker mb-2">Pattern 1</p>
-        <h1 className="display-title mb-4 text-3xl font-bold text-[var(--sea-ink)]">
+        <h1 className="display-title mb-4 text-3xl font-bold text-(--sea-ink)">
           Manual Fetch with enabled: false
         </h1>
-        <p className="mb-6 text-[var(--sea-ink-soft)]">
+        <p className="mb-6 text-(--sea-ink-soft)">
           Use <code>enabled: false</code> to prevent automatic fetching. Call <code>refetch()</code>{" "}
           to trigger the query manually.
         </p>
@@ -40,7 +40,7 @@ result.refetch()`}</pre>
         <button
           onClick={() => result.refetch()}
           disabled={result.isFetching}
-          className="mb-6 rounded-full border border-[rgba(50,143,151,0.3)] bg-[rgba(79,184,178,0.14)] px-5 py-2.5 text-sm font-semibold text-[var(--lagoon-deep)] transition hover:-translate-y-0.5 hover:bg-[rgba(79,184,178,0.24)] disabled:cursor-not-allowed disabled:opacity-50"
+          className="mb-6 rounded-full border border-[rgba(50,143,151,0.3)] bg-[rgba(79,184,178,0.14)] px-5 py-2.5 text-sm font-semibold text-(--lagoon-deep) transition hover:-translate-y-0.5 hover:bg-[rgba(79,184,178,0.24)] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {result.isFetching ? "Fetching..." : "Fetch Todos"}
         </button>
@@ -59,7 +59,7 @@ result.refetch()`}</pre>
             </h3>
             <ul className="space-y-2">
               {result.data.slice(0, 5).map((todo) => (
-                <li key={todo.id} className="flex items-center gap-2 text-sm text-[var(--sea-ink)]">
+                <li key={todo.id} className="flex items-center gap-2 text-sm text-(--sea-ink)">
                   <span
                     className="inline-block h-4 w-4 flex-shrink-0 rounded border"
                     style={{
@@ -76,9 +76,9 @@ result.refetch()`}</pre>
           </div>
         )}
 
-        <div className="mt-6 rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4">
-          <h4 className="mb-2 text-sm font-semibold text-[var(--sea-ink)]">Key Insights</h4>
-          <ul className="list-disc space-y-1 pl-4 text-xs text-[var(--sea-ink-soft)]">
+        <div className="mt-6 rounded-lg border border-(--line) bg-(--surface) p-4">
+          <h4 className="mb-2 text-sm font-semibold text-(--sea-ink)">Key Insights</h4>
+          <ul className="list-disc space-y-1 pl-4 text-xs text-(--sea-ink-soft)">
             <li>
               <code>isPending</code>: true when there's no data yet
             </li>

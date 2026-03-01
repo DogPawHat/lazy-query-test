@@ -27,10 +27,10 @@ function App() {
         <div className="pointer-events-none absolute -top-24 -left-20 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(79,184,178,0.32),transparent_66%)]" />
         <div className="pointer-events-none absolute -right-20 -bottom-20 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(47,106,74,0.18),transparent_66%)]" />
         <p className="island-kicker mb-3">Interactive Demos</p>
-        <h1 className="display-title mb-5 max-w-3xl text-4xl leading-[1.02] font-bold tracking-tight text-[var(--sea-ink)] sm:text-6xl">
+        <h1 className="display-title mb-5 max-w-3xl text-4xl leading-[1.02] font-bold tracking-tight text-(--sea-ink) sm:text-6xl">
           Lazy Query Patterns
         </h1>
-        <p className="mb-8 max-w-2xl text-base text-[var(--sea-ink-soft)] sm:text-lg">
+        <p className="mb-8 max-w-2xl text-base text-(--sea-ink-soft) sm:text-lg">
           React Query queries that don't run automatically on mount. Learn how to control when data
           fetching happens using the enabled option, refetch(), and skipToken.
         </p>
@@ -44,15 +44,15 @@ function App() {
             className="island-shell feature-card rise-in rounded-2xl p-6 no-underline transition hover:-translate-y-1"
             style={{ animationDelay: `${index * 90 + 80}ms` }}
           >
-            <h2 className="mb-2 text-lg font-semibold text-[var(--sea-ink)]">{demo.title}</h2>
-            <p className="m-0 text-sm text-[var(--sea-ink-soft)]">{demo.description}</p>
+            <h2 className="mb-2 text-lg font-semibold text-(--sea-ink)">{demo.title}</h2>
+            <p className="m-0 text-sm text-(--sea-ink-soft)">{demo.description}</p>
           </Link>
         ))}
       </section>
 
       <section className="island-shell mt-8 rounded-2xl p-6">
         <p className="island-kicker mb-2">What are Lazy Queries?</p>
-        <p className="text-sm text-[var(--sea-ink-soft)]">
+        <p className="text-sm text-(--sea-ink-soft)">
           By default, useQuery fetches data immediately when the component mounts. Lazy queries give
           you control over when fetching happens — useful for user-triggered actions, conditional
           dependencies, or avoiding unnecessary requests.
