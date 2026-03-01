@@ -1,0 +1,23 @@
+{
+  "lsp": {
+    "tailwindcss-ls": {
+      "settings": {
+        "tailwindCSS": {
+          "experimental": {
+            "configFile": "src/styles.css"
+          },
+          "includeLanguages": {
+            "typescript": "javascript",
+            "typescriptreact": "javascript"
+          },
+          "classAttributes": [
+            "class",
+            "className",
+            "ngClass",
+            "class:list"
+          ]
+        }
+      }
+    }
+  }
+}
