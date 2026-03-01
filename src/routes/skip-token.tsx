@@ -10,12 +10,6 @@ export const Route = createFileRoute("/skip-token")({
 
 function SkipTokenDemo() {
   const [postId, setPostId] = useState<number | null>(null);
-  const [refetchError, setRefetchError] = useState<string | null>(null);
-  const [prevPostId, setPrevPostId] = useState(postId);
-  if (postId !== prevPostId) {
-    setPrevPostId(postId);
-    setRefetchError(null);
-  }
 
   const result = useQuery({
     queryKey: ["post", postId],
@@ -86,23 +80,19 @@ const result = useQuery({
 
         <div className="mb-6">
           <button
-            onClick={async () => {
-              setRefetchError(null);
-              try {
-                await result.refetch({ throwOnError: true });
-              } catch (err) {
-                setRefetchError(
-                  err instanceof Error ? err.message : String(err),
-                );
-              }
+            onClick={() => {
+              void result.refetch();
             }}
             className="rounded-lg border border-[var(--line)] bg-[var(--surface)] px-4 py-2 text-sm font-medium text-[var(--sea-ink)] transition hover:bg-[var(--link-bg-hover)]"
           >
             Try refetch()
           </button>
-          {refetchError && (
-            <p className="mt-2 text-sm text-red-500">Error: {refetchError}</p>
-          )}
+          {result.isError &&
+            result.error.message.includes("Missing queryFn") && (
+              <p className="mt-2 text-sm text-red-500">
+                Error: {result.error.message}
+              </p>
+            )}
         </div>
 
         {result.isSuccess && result.data && (
