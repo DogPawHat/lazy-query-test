@@ -16,14 +16,14 @@ function ManualFetchDemo() {
 
   return (
     <main className="page-wrap px-4 pt-14 pb-8">
-      <section className="island-shell rise-in rounded-[2rem] p-8">
+      <section className="island-shell rise-in rounded-4xl p-8">
         <p className="island-kicker mb-2">Pattern 1</p>
         <h1 className="display-title mb-4 text-3xl font-bold text-(--sea-ink)">
           Manual Fetch with enabled: false
         </h1>
         <p className="mb-6 text-(--sea-ink-soft)">
-          Use <code>enabled: false</code> to prevent automatic fetching. Call <code>refetch()</code>{" "}
-          to trigger the query manually.
+          Use <code>enabled: false</code> to prevent automatic fetching. Call{" "}
+          <code>refetch()</code> to trigger the query manually.
         </p>
 
         <div className="mb-6 overflow-x-auto rounded-lg bg-slate-900 p-4 text-sm text-slate-100">
@@ -59,15 +59,24 @@ result.refetch()`}</pre>
             </h3>
             <ul className="space-y-2">
               {result.data.slice(0, 5).map((todo) => (
-                <li key={todo.id} className="flex items-center gap-2 text-sm text-(--sea-ink)">
+                <li
+                  key={todo.id}
+                  className="flex items-center gap-2 text-sm text-(--sea-ink)"
+                >
                   <span
                     className="inline-block h-4 w-4 flex-shrink-0 rounded border"
                     style={{
-                      backgroundColor: todo.completed ? "var(--lagoon)" : "transparent",
-                      borderColor: todo.completed ? "var(--lagoon)" : "var(--line)",
+                      backgroundColor: todo.completed
+                        ? "var(--lagoon)"
+                        : "transparent",
+                      borderColor: todo.completed
+                        ? "var(--lagoon)"
+                        : "var(--line)",
                     }}
                   />
-                  <span className={todo.completed ? "line-through opacity-60" : ""}>
+                  <span
+                    className={todo.completed ? "line-through opacity-60" : ""}
+                  >
                     {todo.title}
                   </span>
                 </li>
@@ -77,7 +86,9 @@ result.refetch()`}</pre>
         )}
 
         <div className="mt-6 rounded-lg border border-(--line) bg-(--surface) p-4">
-          <h4 className="mb-2 text-sm font-semibold text-(--sea-ink)">Key Insights</h4>
+          <h4 className="mb-2 text-sm font-semibold text-(--sea-ink)">
+            Key Insights
+          </h4>
           <ul className="list-disc space-y-1 pl-4 text-xs text-(--sea-ink-soft)">
             <li>
               <code>isPending</code>: true when there's no data yet
