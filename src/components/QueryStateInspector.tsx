@@ -19,9 +19,9 @@ export function QueryStateInspector({ result }: QueryStateInspectorProps) {
   ];
 
   return (
-    <div className="island-shell p-4 rounded-xl space-y-3">
+    <div className="island-shell space-y-3 rounded-xl p-4">
       <h3
-        className="text-sm font-semibold uppercase tracking-wide"
+        className="text-sm font-semibold tracking-wide uppercase"
         style={{ color: "var(--kicker)" }}
       >
         Query State
@@ -30,7 +30,7 @@ export function QueryStateInspector({ result }: QueryStateInspectorProps) {
         {booleanFlags.map((flag) => (
           <span
             key={flag.label}
-            className="px-3 py-1 rounded-full text-xs font-medium transition-colors"
+            className="rounded-full px-3 py-1 text-xs font-medium transition-colors"
             style={{
               backgroundColor: flag.value ? "var(--lagoon)" : "var(--chip-bg)",
               color: flag.value ? "#fff" : "var(--sea-ink-soft)",
@@ -45,7 +45,7 @@ export function QueryStateInspector({ result }: QueryStateInspectorProps) {
         {stringValues.map((item) => (
           <span
             key={item.label}
-            className="px-3 py-1 rounded-full text-xs font-medium"
+            className="rounded-full px-3 py-1 text-xs font-medium"
             style={{
               backgroundColor: "var(--chip-bg)",
               color: "var(--sea-ink-soft)",

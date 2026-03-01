@@ -15,7 +15,7 @@ function ManualFetchDemo() {
   });
 
   return (
-    <main className="page-wrap px-4 pb-8 pt-14">
+    <main className="page-wrap px-4 pt-14 pb-8">
       <section className="island-shell rise-in rounded-[2rem] p-8">
         <p className="island-kicker mb-2">Pattern 1</p>
         <h1 className="display-title mb-4 text-3xl font-bold text-[var(--sea-ink)]">
@@ -26,7 +26,7 @@ function ManualFetchDemo() {
           to trigger the query manually.
         </p>
 
-        <div className="mb-6 rounded-lg bg-slate-900 p-4 text-sm text-slate-100 overflow-x-auto">
+        <div className="mb-6 overflow-x-auto rounded-lg bg-slate-900 p-4 text-sm text-slate-100">
           <pre>{`const result = useQuery({
   queryKey: ['todos'],
   queryFn: fetchTodos,
@@ -40,7 +40,7 @@ result.refetch()`}</pre>
         <button
           onClick={() => result.refetch()}
           disabled={result.isFetching}
-          className="mb-6 rounded-full border border-[rgba(50,143,151,0.3)] bg-[rgba(79,184,178,0.14)] px-5 py-2.5 text-sm font-semibold text-[var(--lagoon-deep)] transition hover:-translate-y-0.5 hover:bg-[rgba(79,184,178,0.24)] disabled:opacity-50 disabled:cursor-not-allowed"
+          className="mb-6 rounded-full border border-[rgba(50,143,151,0.3)] bg-[rgba(79,184,178,0.14)] px-5 py-2.5 text-sm font-semibold text-[var(--lagoon-deep)] transition hover:-translate-y-0.5 hover:bg-[rgba(79,184,178,0.24)] disabled:cursor-not-allowed disabled:opacity-50"
         >
           {result.isFetching ? "Fetching..." : "Fetch Todos"}
         </button>
@@ -52,7 +52,7 @@ result.refetch()`}</pre>
         {result.isSuccess && result.data && (
           <div className="island-shell rounded-xl p-4">
             <h3
-              className="mb-3 text-sm font-semibold uppercase tracking-wide"
+              className="mb-3 text-sm font-semibold tracking-wide uppercase"
               style={{ color: "var(--kicker)" }}
             >
               Todos ({result.data.length})
@@ -61,7 +61,7 @@ result.refetch()`}</pre>
               {result.data.slice(0, 5).map((todo) => (
                 <li key={todo.id} className="flex items-center gap-2 text-sm text-[var(--sea-ink)]">
                   <span
-                    className="inline-block w-4 h-4 rounded border flex-shrink-0"
+                    className="inline-block h-4 w-4 flex-shrink-0 rounded border"
                     style={{
                       backgroundColor: todo.completed ? "var(--lagoon)" : "transparent",
                       borderColor: todo.completed ? "var(--lagoon)" : "var(--line)",
@@ -76,9 +76,9 @@ result.refetch()`}</pre>
           </div>
         )}
 
-        <div className="mt-6 p-4 rounded-lg border border-[var(--line)] bg-[var(--surface)]">
-          <h4 className="text-sm font-semibold mb-2 text-[var(--sea-ink)]">Key Insights</h4>
-          <ul className="text-xs space-y-1 text-[var(--sea-ink-soft)] list-disc pl-4">
+        <div className="mt-6 rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4">
+          <h4 className="mb-2 text-sm font-semibold text-[var(--sea-ink)]">Key Insights</h4>
+          <ul className="list-disc space-y-1 pl-4 text-xs text-[var(--sea-ink-soft)]">
             <li>
               <code>isPending</code>: true when there's no data yet
             </li>

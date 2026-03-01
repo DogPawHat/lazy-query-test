@@ -17,7 +17,7 @@ function SkipTokenDemo() {
   });
 
   return (
-    <main className="page-wrap px-4 pb-8 pt-14">
+    <main className="page-wrap px-4 pt-14 pb-8">
       <section className="island-shell rise-in rounded-[2rem] p-8">
         <p className="island-kicker mb-2">Pattern 3</p>
         <h1 className="display-title mb-4 text-3xl font-bold text-[var(--sea-ink)]">
@@ -28,7 +28,7 @@ function SkipTokenDemo() {
           enabled: false, skipToken is a value that can be passed to queryFn.
         </p>
 
-        <div className="mb-6 rounded-lg bg-slate-900 p-4 text-sm text-slate-100 overflow-x-auto">
+        <div className="mb-6 overflow-x-auto rounded-lg bg-slate-900 p-4 text-sm text-slate-100">
           <pre>{`import { skipToken } from '@tanstack/react-query'
 
 const [postId, setPostId] = useState<number | null>(null)
@@ -40,7 +40,7 @@ const result = useQuery({
         </div>
 
         <div className="mb-6">
-          <label className="block text-sm font-medium mb-2 text-[var(--sea-ink)]">
+          <label className="mb-2 block text-sm font-medium text-[var(--sea-ink)]">
             Select Post ID
           </label>
           <div className="flex flex-wrap gap-2">
@@ -91,19 +91,19 @@ const result = useQuery({
         {result.isSuccess && result.data && (
           <div className="island-shell rounded-xl p-4">
             <h3
-              className="mb-3 text-sm font-semibold uppercase tracking-wide"
+              className="mb-3 text-sm font-semibold tracking-wide uppercase"
               style={{ color: "var(--kicker)" }}
             >
               Post #{result.data.id}
             </h3>
-            <h4 className="font-semibold text-[var(--sea-ink)] mb-2">{result.data.title}</h4>
+            <h4 className="mb-2 font-semibold text-[var(--sea-ink)]">{result.data.title}</h4>
             <p className="text-sm text-[var(--sea-ink-soft)]">{result.data.body}</p>
           </div>
         )}
 
-        <div className="mt-6 p-4 rounded-lg border border-[var(--line)] bg-[var(--surface)]">
-          <h4 className="text-sm font-semibold mb-2 text-[var(--sea-ink)]">Key Insights</h4>
-          <ul className="text-xs space-y-1 text-[var(--sea-ink-soft)] list-disc pl-4">
+        <div className="mt-6 rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4">
+          <h4 className="mb-2 text-sm font-semibold text-[var(--sea-ink)]">Key Insights</h4>
+          <ul className="list-disc space-y-1 pl-4 text-xs text-[var(--sea-ink-soft)]">
             <li>
               <code>skipToken</code> is a special value that tells React Query to skip this query
             </li>
