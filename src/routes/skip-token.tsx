@@ -1,26 +1,26 @@
-import { useState } from 'react'
-import { useQuery, skipToken } from '@tanstack/react-query'
-import { createFileRoute } from '@tanstack/react-router'
-import { fetchPostById } from '../lib/api'
-import { QueryStateInspector } from '../components/QueryStateInspector'
+import { useState } from "react";
+import { useQuery, skipToken } from "@tanstack/react-query";
+import { createFileRoute } from "@tanstack/react-router";
+import { fetchPostById } from "../lib/api";
+import { QueryStateInspector } from "../components/QueryStateInspector";
 
-export const Route = createFileRoute('/skip-token')({
+export const Route = createFileRoute("/skip-token")({
   component: SkipTokenDemo,
-})
+});
 
 function SkipTokenDemo() {
-  const [postId, setPostId] = useState<number | null>(null)
-  const [refetchError, setRefetchError] = useState<string | null>(null)
-  const [prevPostId, setPrevPostId] = useState(postId)
+  const [postId, setPostId] = useState<number | null>(null);
+  const [refetchError, setRefetchError] = useState<string | null>(null);
+  const [prevPostId, setPrevPostId] = useState(postId);
   if (postId !== prevPostId) {
-    setPrevPostId(postId)
-    setRefetchError(null)
+    setPrevPostId(postId);
+    setRefetchError(null);
   }
 
   const result = useQuery({
-    queryKey: ['post', postId],
+    queryKey: ["post", postId],
     queryFn: postId ? () => fetchPostById(postId) : skipToken,
-  })
+  });
 
   return (
     <main className="page-wrap px-4 pb-8 pt-14">
@@ -31,8 +31,8 @@ function SkipTokenDemo() {
         </h1>
         <p className="mb-6 text-[var(--sea-ink-soft)]">
           Use <code>skipToken</code> to declaratively skip queries when data is
-          missing. Unlike enabled: false, skipToken is a value that can be passed
-          to queryFn.
+          missing. Unlike enabled: false, skipToken is a value that can be
+          passed to queryFn.
         </p>
 
         <div className="mb-6 rounded-lg bg-slate-900 p-4 text-sm text-slate-100 overflow-x-auto">
@@ -57,11 +57,10 @@ const result = useQuery({
                 onClick={() => setPostId(id)}
                 className="rounded-lg border px-3 py-1.5 text-sm font-medium transition"
                 style={{
-                  borderColor:
-                    postId === id ? 'var(--lagoon)' : 'var(--line)',
+                  borderColor: postId === id ? "var(--lagoon)" : "var(--line)",
                   backgroundColor:
-                    postId === id ? 'var(--lagoon)' : 'var(--surface)',
-                  color: postId === id ? '#fff' : 'var(--sea-ink)',
+                    postId === id ? "var(--lagoon)" : "var(--surface)",
+                  color: postId === id ? "#fff" : "var(--sea-ink)",
                 }}
               >
                 {id}
@@ -77,7 +76,7 @@ const result = useQuery({
           <p className="mt-2 text-xs text-[var(--sea-ink-soft)]">
             {postId
               ? `Selected post ${postId}`
-              : 'No post selected (using skipToken)'}
+              : "No post selected (using skipToken)"}
           </p>
         </div>
 
@@ -88,11 +87,13 @@ const result = useQuery({
         <div className="mb-6">
           <button
             onClick={async () => {
-              setRefetchError(null)
+              setRefetchError(null);
               try {
-                await result.refetch()
+                await result.refetch({ throwOnError: true });
               } catch (err) {
-                setRefetchError(err instanceof Error ? err.message : String(err))
+                setRefetchError(
+                  err instanceof Error ? err.message : String(err),
+                );
               }
             }}
             className="rounded-lg border border-[var(--line)] bg-[var(--surface)] px-4 py-2 text-sm font-medium text-[var(--sea-ink)] transition hover:bg-[var(--link-bg-hover)]"
@@ -100,21 +101,24 @@ const result = useQuery({
             Try refetch()
           </button>
           {refetchError && (
-            <p className="mt-2 text-sm text-red-500">
-              Error: {refetchError}
-            </p>
+            <p className="mt-2 text-sm text-red-500">Error: {refetchError}</p>
           )}
         </div>
 
         {result.isSuccess && result.data && (
           <div className="island-shell rounded-xl p-4">
-            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide" style={{ color: 'var(--kicker)' }}>
+            <h3
+              className="mb-3 text-sm font-semibold uppercase tracking-wide"
+              style={{ color: "var(--kicker)" }}
+            >
               Post #{result.data.id}
             </h3>
             <h4 className="font-semibold text-[var(--sea-ink)] mb-2">
               {result.data.title}
             </h4>
-            <p className="text-sm text-[var(--sea-ink-soft)]">{result.data.body}</p>
+            <p className="text-sm text-[var(--sea-ink-soft)]">
+              {result.data.body}
+            </p>
           </div>
         )}
 
@@ -124,15 +128,14 @@ const result = useQuery({
           </h4>
           <ul className="text-xs space-y-1 text-[var(--sea-ink-soft)] list-disc pl-4">
             <li>
-              <code>skipToken</code> is a special value that tells React Query to
-              skip this query
+              <code>skipToken</code> is a special value that tells React Query
+              to skip this query
             </li>
+            <li>Unlike enabled: false, skipToken works at the queryFn level</li>
             <li>
-              Unlike enabled: false, skipToken works at the queryFn level
-            </li>
-            <li>
-              <code>refetch()</code> throws "Missing queryFn" error when skipToken
-              is active (use enabled: false if you need manual refetch)
+              <code>refetch()</code> throws "Missing queryFn" error when
+              skipToken is active (use enabled: false if you need manual
+              refetch)
             </li>
             <li>
               fetchStatus will be "idle" when skipped, status stays in previous
@@ -145,5 +148,5 @@ const result = useQuery({
         </div>
       </section>
     </main>
-  )
+  );
 }
