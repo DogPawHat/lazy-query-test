@@ -22,8 +22,8 @@ function ManualFetchDemo() {
           Manual Fetch with enabled: false
         </h1>
         <p className="mb-6 text-[var(--sea-ink-soft)]">
-          Use <code>enabled: false</code> to prevent automatic fetching. Call{" "}
-          <code>refetch()</code> to trigger the query manually.
+          Use <code>enabled: false</code> to prevent automatic fetching. Call <code>refetch()</code>{" "}
+          to trigger the query manually.
         </p>
 
         <div className="mb-6 rounded-lg bg-slate-900 p-4 text-sm text-slate-100 overflow-x-auto">
@@ -59,24 +59,15 @@ result.refetch()`}</pre>
             </h3>
             <ul className="space-y-2">
               {result.data.slice(0, 5).map((todo) => (
-                <li
-                  key={todo.id}
-                  className="flex items-center gap-2 text-sm text-[var(--sea-ink)]"
-                >
+                <li key={todo.id} className="flex items-center gap-2 text-sm text-[var(--sea-ink)]">
                   <span
                     className="inline-block w-4 h-4 rounded border flex-shrink-0"
                     style={{
-                      backgroundColor: todo.completed
-                        ? "var(--lagoon)"
-                        : "transparent",
-                      borderColor: todo.completed
-                        ? "var(--lagoon)"
-                        : "var(--line)",
+                      backgroundColor: todo.completed ? "var(--lagoon)" : "transparent",
+                      borderColor: todo.completed ? "var(--lagoon)" : "var(--line)",
                     }}
                   />
-                  <span
-                    className={todo.completed ? "line-through opacity-60" : ""}
-                  >
+                  <span className={todo.completed ? "line-through opacity-60" : ""}>
                     {todo.title}
                   </span>
                 </li>
@@ -86,9 +77,7 @@ result.refetch()`}</pre>
         )}
 
         <div className="mt-6 p-4 rounded-lg border border-[var(--line)] bg-[var(--surface)]">
-          <h4 className="text-sm font-semibold mb-2 text-[var(--sea-ink)]">
-            Key Insights
-          </h4>
+          <h4 className="text-sm font-semibold mb-2 text-[var(--sea-ink)]">Key Insights</h4>
           <ul className="text-xs space-y-1 text-[var(--sea-ink-soft)] list-disc pl-4">
             <li>
               <code>isPending</code>: true when there's no data yet

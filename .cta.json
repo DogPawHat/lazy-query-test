@@ -11,8 +11,5 @@
   "routerOnly": false,
   "version": 1,
   "framework": "react",
-  "chosenAddOns": [
-    "nitro",
-    "tanstack-query"
-  ]
+  "chosenAddOns": ["nitro", "tanstack-query"]
 }

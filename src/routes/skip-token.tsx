@@ -24,9 +24,8 @@ function SkipTokenDemo() {
           Skip Token for Declarative Skipping
         </h1>
         <p className="mb-6 text-[var(--sea-ink-soft)]">
-          Use <code>skipToken</code> to declaratively skip queries when data is
-          missing. Unlike enabled: false, skipToken is a value that can be
-          passed to queryFn.
+          Use <code>skipToken</code> to declaratively skip queries when data is missing. Unlike
+          enabled: false, skipToken is a value that can be passed to queryFn.
         </p>
 
         <div className="mb-6 rounded-lg bg-slate-900 p-4 text-sm text-slate-100 overflow-x-auto">
@@ -52,8 +51,7 @@ const result = useQuery({
                 className="rounded-lg border px-3 py-1.5 text-sm font-medium transition"
                 style={{
                   borderColor: postId === id ? "var(--lagoon)" : "var(--line)",
-                  backgroundColor:
-                    postId === id ? "var(--lagoon)" : "var(--surface)",
+                  backgroundColor: postId === id ? "var(--lagoon)" : "var(--surface)",
                   color: postId === id ? "#fff" : "var(--sea-ink)",
                 }}
               >
@@ -68,9 +66,7 @@ const result = useQuery({
             </button>
           </div>
           <p className="mt-2 text-xs text-[var(--sea-ink-soft)]">
-            {postId
-              ? `Selected post ${postId}`
-              : "No post selected (using skipToken)"}
+            {postId ? `Selected post ${postId}` : "No post selected (using skipToken)"}
           </p>
         </div>
 
@@ -87,12 +83,9 @@ const result = useQuery({
           >
             Try refetch()
           </button>
-          {result.isError &&
-            result.error.message.includes("Missing queryFn") && (
-              <p className="mt-2 text-sm text-red-500">
-                Error: {result.error.message}
-              </p>
-            )}
+          {result.isError && result.error.message.includes("Missing queryFn") && (
+            <p className="mt-2 text-sm text-red-500">Error: {result.error.message}</p>
+          )}
         </div>
 
         {result.isSuccess && result.data && (
@@ -103,37 +96,24 @@ const result = useQuery({
             >
               Post #{result.data.id}
             </h3>
-            <h4 className="font-semibold text-[var(--sea-ink)] mb-2">
-              {result.data.title}
-            </h4>
-            <p className="text-sm text-[var(--sea-ink-soft)]">
-              {result.data.body}
-            </p>
+            <h4 className="font-semibold text-[var(--sea-ink)] mb-2">{result.data.title}</h4>
+            <p className="text-sm text-[var(--sea-ink-soft)]">{result.data.body}</p>
           </div>
         )}
 
         <div className="mt-6 p-4 rounded-lg border border-[var(--line)] bg-[var(--surface)]">
-          <h4 className="text-sm font-semibold mb-2 text-[var(--sea-ink)]">
-            Key Insights
-          </h4>
+          <h4 className="text-sm font-semibold mb-2 text-[var(--sea-ink)]">Key Insights</h4>
           <ul className="text-xs space-y-1 text-[var(--sea-ink-soft)] list-disc pl-4">
             <li>
-              <code>skipToken</code> is a special value that tells React Query
-              to skip this query
+              <code>skipToken</code> is a special value that tells React Query to skip this query
             </li>
             <li>Unlike enabled: false, skipToken works at the queryFn level</li>
             <li>
-              <code>refetch()</code> throws "Missing queryFn" error when
-              skipToken is active (use enabled: false if you need manual
-              refetch)
+              <code>refetch()</code> throws "Missing queryFn" error when skipToken is active (use
+              enabled: false if you need manual refetch)
             </li>
-            <li>
-              fetchStatus will be "idle" when skipped, status stays in previous
-              state
-            </li>
-            <li>
-              Useful for TypeScript type safety with optional query parameters
-            </li>
+            <li>fetchStatus will be "idle" when skipped, status stays in previous state</li>
+            <li>Useful for TypeScript type safety with optional query parameters</li>
           </ul>
         </div>
       </section>

@@ -1,25 +1,25 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/')({ component: App })
+export const Route = createFileRoute("/")({ component: App });
 
 function App() {
   const demos = [
     {
-      title: 'Manual Fetch',
-      description: 'Use enabled: false with refetch() to manually trigger queries',
-      href: '/manual-fetch',
+      title: "Manual Fetch",
+      description: "Use enabled: false with refetch() to manually trigger queries",
+      href: "/manual-fetch",
     },
     {
-      title: 'Conditional Query',
-      description: 'Use enabled: !!value to activate queries based on state',
-      href: '/conditional-query',
+      title: "Conditional Query",
+      description: "Use enabled: !!value to activate queries based on state",
+      href: "/conditional-query",
     },
     {
-      title: 'Skip Token',
-      description: 'Use skipToken to declaratively skip queries when data is missing',
-      href: '/skip-token',
+      title: "Skip Token",
+      description: "Use skipToken to declaratively skip queries when data is missing",
+      href: "/skip-token",
     },
-  ]
+  ];
 
   return (
     <main className="page-wrap px-4 pb-8 pt-14">
@@ -31,9 +31,8 @@ function App() {
           Lazy Query Patterns
         </h1>
         <p className="mb-8 max-w-2xl text-base text-[var(--sea-ink-soft)] sm:text-lg">
-          React Query queries that don't run automatically on mount. Learn how to
-          control when data fetching happens using the enabled option, refetch(),
-          and skipToken.
+          React Query queries that don't run automatically on mount. Learn how to control when data
+          fetching happens using the enabled option, refetch(), and skipToken.
         </p>
       </section>
 
@@ -45,9 +44,7 @@ function App() {
             className="island-shell feature-card rise-in rounded-2xl p-6 no-underline transition hover:-translate-y-1"
             style={{ animationDelay: `${index * 90 + 80}ms` }}
           >
-            <h2 className="mb-2 text-lg font-semibold text-[var(--sea-ink)]">
-              {demo.title}
-            </h2>
+            <h2 className="mb-2 text-lg font-semibold text-[var(--sea-ink)]">{demo.title}</h2>
             <p className="m-0 text-sm text-[var(--sea-ink-soft)]">{demo.description}</p>
           </Link>
         ))}
@@ -56,12 +53,11 @@ function App() {
       <section className="island-shell mt-8 rounded-2xl p-6">
         <p className="island-kicker mb-2">What are Lazy Queries?</p>
         <p className="text-sm text-[var(--sea-ink-soft)]">
-          By default, useQuery fetches data immediately when the component mounts.
-          Lazy queries give you control over when fetching happens — useful for
-          user-triggered actions, conditional dependencies, or avoiding unnecessary
-          requests.
+          By default, useQuery fetches data immediately when the component mounts. Lazy queries give
+          you control over when fetching happens — useful for user-triggered actions, conditional
+          dependencies, or avoiding unnecessary requests.
         </p>
       </section>
     </main>
-  )
+  );
 }

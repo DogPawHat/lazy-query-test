@@ -1,21 +1,21 @@
-import { useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
-import { createFileRoute } from '@tanstack/react-router'
-import { fetchUsers } from '../lib/api'
-import { QueryStateInspector } from '../components/QueryStateInspector'
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { createFileRoute } from "@tanstack/react-router";
+import { fetchUsers } from "../lib/api";
+import { QueryStateInspector } from "../components/QueryStateInspector";
 
-export const Route = createFileRoute('/conditional-query')({
+export const Route = createFileRoute("/conditional-query")({
   component: ConditionalQueryDemo,
-})
+});
 
 function ConditionalQueryDemo() {
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState("");
 
   const result = useQuery({
-    queryKey: ['users', search],
+    queryKey: ["users", search],
     queryFn: () => fetchUsers(search),
     enabled: !!search,
-  })
+  });
 
   return (
     <main className="page-wrap px-4 pb-8 pt-14">
@@ -25,8 +25,8 @@ function ConditionalQueryDemo() {
           Conditional Query with enabled
         </h1>
         <p className="mb-6 text-[var(--sea-ink-soft)]">
-          Use <code>enabled: !!value</code> to activate the query only when a
-          condition is met. The query disables automatically when the input is empty.
+          Use <code>enabled: !!value</code> to activate the query only when a condition is met. The
+          query disables automatically when the input is empty.
         </p>
 
         <div className="mb-6 rounded-lg bg-slate-900 p-4 text-sm text-slate-100 overflow-x-auto">
@@ -51,7 +51,7 @@ const result = useQuery({
             className="w-full rounded-lg border border-[var(--line)] bg-[var(--surface)] px-4 py-2.5 text-sm text-[var(--sea-ink)] placeholder:text-[var(--sea-ink-soft)] focus:outline-none focus:border-[var(--lagoon)]"
           />
           <p className="mt-2 text-xs text-[var(--sea-ink-soft)]">
-            Query is {search ? 'enabled' : 'disabled'} (enabled: {!!search})
+            Query is {search ? "enabled" : "disabled"} (enabled: {!!search})
           </p>
         </div>
 
@@ -61,8 +61,11 @@ const result = useQuery({
 
         {result.isSuccess && result.data && (
           <div className="island-shell rounded-xl p-4">
-            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide" style={{ color: 'var(--kicker)' }}>
-              Results ({result.data.length} user{result.data.length !== 1 ? 's' : ''})
+            <h3
+              className="mb-3 text-sm font-semibold uppercase tracking-wide"
+              style={{ color: "var(--kicker)" }}
+            >
+              Results ({result.data.length} user{result.data.length !== 1 ? "s" : ""})
             </h3>
             {result.data.length > 0 ? (
               <ul className="space-y-3">
@@ -94,5 +97,5 @@ const result = useQuery({
         </div>
       </section>
     </main>
-  )
+  );
 }

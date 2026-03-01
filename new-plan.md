@@ -11,6 +11,7 @@ pnpm is already the package manager (pnpm-lock.yaml exists, no npm lock file). R
 ## Phase 1: Remove blog/content-collections infrastructure
 
 **Delete files:**
+
 - `src/routes/blog.index.tsx`
 - `src/routes/blog.$slug.tsx`
 - `src/routes/rss[.]xml.ts`
@@ -42,6 +43,7 @@ pnpm is already the package manager (pnpm-lock.yaml exists, no npm lock file). R
 ### `src/components/QueryStateInspector.tsx` — Reusable state visualizer
 
 Accepts a query result and renders a grid of labeled pills showing:
+
 - Boolean flags: `isPending`, `isFetching`, `isLoading`, `isError`, `isSuccess`
 - String values: `status`, `fetchStatus`
 - Each flag colored green when true, gray when false
@@ -59,8 +61,9 @@ Accepts a query result and renders a grid of labeled pills showing:
 ### `src/routes/manual-fetch.tsx` — Pattern 1: `enabled: false` + `refetch()`
 
 ```tsx
-useQuery({ queryKey: ['todos'], queryFn: fetchTodos, enabled: false })
+useQuery({ queryKey: ["todos"], queryFn: fetchTodos, enabled: false });
 ```
+
 - "Fetch Todos" button calls `refetch()`
 - QueryStateInspector showing all flags
 - Code snippet showing the pattern
@@ -69,9 +72,10 @@ useQuery({ queryKey: ['todos'], queryFn: fetchTodos, enabled: false })
 ### `src/routes/conditional-query.tsx` — Pattern 2: `enabled: !!value`
 
 ```tsx
-const [search, setSearch] = useState('')
-useQuery({ queryKey: ['users', search], queryFn: () => fetchUsers(search), enabled: !!search })
+const [search, setSearch] = useState("");
+useQuery({ queryKey: ["users", search], queryFn: () => fetchUsers(search), enabled: !!search });
 ```
+
 - Text input for searching users
 - Query activates when input is non-empty, disables when cleared
 - QueryStateInspector + results list
@@ -79,9 +83,10 @@ useQuery({ queryKey: ['users', search], queryFn: () => fetchUsers(search), enabl
 ### `src/routes/skip-token.tsx` — Pattern 3: `skipToken`
 
 ```tsx
-const [postId, setPostId] = useState<number | null>(null)
-useQuery({ queryKey: ['post', postId], queryFn: postId ? () => fetchPostById(postId) : skipToken })
+const [postId, setPostId] = useState<number | null>(null);
+useQuery({ queryKey: ["post", postId], queryFn: postId ? () => fetchPostById(postId) : skipToken });
 ```
+
 - Numbered buttons (1-10) to select a post ID, "Clear" button to reset
 - Note that `refetch()` is a no-op with skipToken active
 - QueryStateInspector + post content display
@@ -91,6 +96,7 @@ useQuery({ queryKey: ['post', postId], queryFn: postId ? () => fetchPostById(pos
 ## Phase 4: Update navigation and layout
 
 **`src/components/Header.tsx`:** Replace Blog/About/Docs nav links with:
+
 - Home, Manual Fetch, Conditional Query, Skip Token
 
 **`src/routes/__root.tsx`:** Update `<title>` to "Lazy Query Demos"
@@ -110,23 +116,23 @@ useQuery({ queryKey: ['post', postId], queryFn: postId ? () => fetchPostById(pos
 
 ## Key files to modify
 
-| File | Action |
-|------|--------|
-| `src/routes/index.tsx` | Rewrite |
-| `src/components/Header.tsx` | Update nav links |
-| `src/routes/__root.tsx` | Update title |
-| `vite.config.ts` | Remove content-collections plugin |
-| `tsconfig.json` | Remove content-collections path |
+| File                        | Action                            |
+| --------------------------- | --------------------------------- |
+| `src/routes/index.tsx`      | Rewrite                           |
+| `src/components/Header.tsx` | Update nav links                  |
+| `src/routes/__root.tsx`     | Update title                      |
+| `vite.config.ts`            | Remove content-collections plugin |
+| `tsconfig.json`             | Remove content-collections path   |
 
 ## New files
 
-| File | Purpose |
-|------|---------|
-| `src/lib/api.ts` | JSONPlaceholder fetch functions + types |
-| `src/components/QueryStateInspector.tsx` | Query state visualizer |
-| `src/routes/manual-fetch.tsx` | Pattern 1 demo |
-| `src/routes/conditional-query.tsx` | Pattern 2 demo |
-| `src/routes/skip-token.tsx` | Pattern 3 demo |
+| File                                     | Purpose                                 |
+| ---------------------------------------- | --------------------------------------- |
+| `src/lib/api.ts`                         | JSONPlaceholder fetch functions + types |
+| `src/components/QueryStateInspector.tsx` | Query state visualizer                  |
+| `src/routes/manual-fetch.tsx`            | Pattern 1 demo                          |
+| `src/routes/conditional-query.tsx`       | Pattern 2 demo                          |
+| `src/routes/skip-token.tsx`              | Pattern 3 demo                          |
 
 ## Existing code to reuse
 
