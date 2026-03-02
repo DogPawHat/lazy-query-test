@@ -46,7 +46,7 @@ result.refetch()`}</pre>
           disabled={result.isFetching}
           className="mb-6 rounded-full border border-[rgba(50,143,151,0.3)] bg-[rgba(79,184,178,0.14)] px-5 py-2.5 text-sm font-semibold text-(--lagoon-deep) transition hover:-translate-y-0.5 hover:bg-[rgba(79,184,178,0.24)] disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {result.isFetching ? "Fetching..." : "Fetch Todos"}
+          {result.isFetching ? "Fetching..." : "Fetch Todos (with refetch())"}
         </button>
 
         <div className="mb-6">
@@ -94,8 +94,6 @@ result.refetch()`}</pre>
             </ul>
           </div>
         )}
-
-
       </section>
     </main>
   );

@@ -14,6 +14,7 @@ export const Route = createFileRoute("/conditional-query")({
 function ConditionalQueryDemo() {
   const [search, setSearch] = useState("");
   const [debouncedSearch] = useDebouncedValue(search, { wait: 300 });
+  const queryEnabled = !!debouncedSearch;
 
   const result = useQuery({
     queryKey: ["users", debouncedSearch],
@@ -59,7 +60,8 @@ const result = useQuery({
             className="w-full rounded-lg border border-(--line) bg-(--surface) px-4 py-2.5 text-sm text-(--sea-ink) placeholder:text-(--sea-ink-soft) focus:border-(--lagoon) focus:outline-none"
           />
           <p className="mt-2 text-xs text-(--sea-ink-soft)">
-            Query is {debouncedSearch ? "enabled" : "disabled"} (enabled: {!!debouncedSearch})
+            Query is {debouncedSearch ? "enabled" : "disabled"} (enabled:{" "}
+            {String(queryEnabled)})
           </p>
         </div>
 
@@ -106,8 +108,6 @@ const result = useQuery({
             )}
           </div>
         )}
-
-
       </section>
     </main>
   );
