@@ -3,6 +3,7 @@ import { useQuery, skipToken } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { fetchPostById } from "../lib/api";
+import { EmptyState } from "../components/EmptyState";
 import { QueryStateInspector } from "../components/QueryStateInspector";
 import { useThrottledLoading } from "../hooks/useThrottledLoading";
 
@@ -20,6 +21,47 @@ function SkipTokenDemo() {
   });
 
   const showSpinner = useThrottledLoading(result.isFetching);
+
+  const dataSection = (() => {
+    if (showSpinner) {
+      return (
+        <div className="flex items-center justify-center py-8">
+          <Loader2 className="h-8 w-8 animate-spin text-(--lagoon)" />
+        </div>
+      );
+    }
+
+    if (postId == null) {
+      return (
+        <EmptyState
+          title="No post selected"
+          description="Choose a post ID to run the query with skipToken."
+        />
+      );
+    }
+
+    if (result.data == null) {
+      return (
+        <EmptyState
+          title="No post data"
+          description="Select a different post ID or try fetching again."
+        />
+      );
+    }
+
+    return (
+      <div className="island-shell rounded-xl p-4">
+        <h3
+          className="mb-3 text-sm font-semibold tracking-wide uppercase"
+          style={{ color: "var(--kicker)" }}
+        >
+          Post #{result.data.id}
+        </h3>
+        <h4 className="mb-2 font-semibold text-(--sea-ink)">{result.data.title}</h4>
+        <p className="text-sm text-(--sea-ink-soft)">{result.data.body}</p>
+      </div>
+    );
+  })();
 
   return (
     <main className="page-wrap px-4 pt-14 pb-8">
@@ -100,28 +142,7 @@ const result = useQuery({
             )}
         </div>
 
-        {showSpinner && (
-          <div className="flex items-center justify-center py-8">
-            <Loader2 className="h-8 w-8 animate-spin text-(--lagoon)" />
-          </div>
-        )}
-
-        {!showSpinner && result.isSuccess && result.data && (
-          <div className="island-shell rounded-xl p-4">
-            <h3
-              className="mb-3 text-sm font-semibold tracking-wide uppercase"
-              style={{ color: "var(--kicker)" }}
-            >
-              Post #{result.data.id}
-            </h3>
-            <h4 className="mb-2 font-semibold text-(--sea-ink)">
-              {result.data.title}
-            </h4>
-            <p className="text-sm text-(--sea-ink-soft)">{result.data.body}</p>
-          </div>
-        )}
-
-
+        {dataSection}
       </section>
     </main>
   );

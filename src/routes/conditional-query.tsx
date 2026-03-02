@@ -4,6 +4,7 @@ import { useDebouncedValue } from "@tanstack/react-pacer";
 import { Loader2 } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { fetchUsers } from "../lib/api";
+import { EmptyState } from "../components/EmptyState";
 import { QueryStateInspector } from "../components/QueryStateInspector";
 import { useThrottledLoading } from "../hooks/useThrottledLoading";
 
@@ -23,6 +24,65 @@ function ConditionalQueryDemo() {
   });
 
   const showSpinner = useThrottledLoading(result.isFetching);
+
+  const dataSection = (() => {
+    if (showSpinner) {
+      return (
+        <div className="flex items-center justify-center py-8">
+          <Loader2 className="h-8 w-8 animate-spin text-(--lagoon)" />
+        </div>
+      );
+    }
+
+    if (!queryEnabled) {
+      return (
+        <EmptyState
+          title="Search to load users"
+          description="Type a name, username, or email to enable the query."
+        />
+      );
+    }
+
+    if (result.data == null || result.data.length === 0) {
+      return (
+        <EmptyState
+          title="No matching users"
+          description="Try a different name, username, or email address."
+          action={
+            <button
+              onClick={() => setSearch("")}
+              className="rounded-full border border-[rgba(50,143,151,0.3)] bg-[rgba(79,184,178,0.14)] px-4 py-2 text-sm font-semibold text-(--lagoon-deep) transition hover:-translate-y-0.5 hover:bg-[rgba(79,184,178,0.24)]"
+            >
+              Clear search
+            </button>
+          }
+        />
+      );
+    }
+
+    return (
+      <div className="island-shell rounded-xl p-4">
+        <h3
+          className="mb-3 text-sm font-semibold tracking-wide uppercase"
+          style={{ color: "var(--kicker)" }}
+        >
+          Results ({result.data.length} user{result.data.length !== 1 ? "s" : ""})
+        </h3>
+        <ul className="space-y-3">
+          {result.data.map((user) => (
+            <li
+              key={user.id}
+              className="rounded-lg border border-(--line) bg-(--surface) p-3"
+            >
+              <div className="font-semibold text-(--sea-ink)">{user.name}</div>
+              <div className="text-xs text-(--sea-ink-soft)">@{user.username}</div>
+              <div className="text-xs text-(--sea-ink-soft)">{user.email}</div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  })();
 
   return (
     <main className="page-wrap px-4 pt-14 pb-8">
@@ -69,45 +129,7 @@ const result = useQuery({
           <QueryStateInspector result={result} />
         </div>
 
-        {showSpinner && (
-          <div className="flex items-center justify-center py-8">
-            <Loader2 className="h-8 w-8 animate-spin text-(--lagoon)" />
-          </div>
-        )}
-
-        {!showSpinner && result.isSuccess && result.data && (
-          <div className="island-shell rounded-xl p-4">
-            <h3
-              className="mb-3 text-sm font-semibold tracking-wide uppercase"
-              style={{ color: "var(--kicker)" }}
-            >
-              Results ({result.data.length} user
-              {result.data.length !== 1 ? "s" : ""})
-            </h3>
-            {result.data.length > 0 ? (
-              <ul className="space-y-3">
-                {result.data.map((user) => (
-                  <li
-                    key={user.id}
-                    className="rounded-lg border border-(--line) bg-(--surface) p-3"
-                  >
-                    <div className="font-semibold text-(--sea-ink)">
-                      {user.name}
-                    </div>
-                    <div className="text-xs text-(--sea-ink-soft)">
-                      @{user.username}
-                    </div>
-                    <div className="text-xs text-(--sea-ink-soft)">
-                      {user.email}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-sm text-(--sea-ink-soft)">No users found</p>
-            )}
-          </div>
-        )}
+        {dataSection}
       </section>
     </main>
   );

@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { fetchTodos } from "../lib/api";
+import { EmptyState } from "../components/EmptyState";
 import { QueryStateInspector } from "../components/QueryStateInspector";
 import { useThrottledLoading } from "../hooks/useThrottledLoading";
 
@@ -17,6 +18,57 @@ function ManualFetchDemo() {
   });
 
   const showSpinner = useThrottledLoading(result.isFetching);
+
+  const dataSection = (() => {
+    if (showSpinner) {
+      return (
+        <div className="flex items-center justify-center py-8">
+          <Loader2 className="h-8 w-8 animate-spin text-(--lagoon)" />
+        </div>
+      );
+    }
+
+    if (result.data == null || result.data.length === 0) {
+      return (
+        <EmptyState
+          title="No todos available"
+          description="Run the query again or check your filters to load new tasks."
+        />
+      );
+    }
+
+    return (
+      <div className="island-shell rounded-xl p-4">
+        <h3
+          className="mb-3 text-sm font-semibold tracking-wide uppercase"
+          style={{ color: "var(--kicker)" }}
+        >
+          Todos ({result.data.length})
+        </h3>
+        <ul className="space-y-2">
+          {result.data.slice(0, 5).map((todo) => (
+            <li
+              key={todo.id}
+              className="flex items-center gap-2 text-sm text-(--sea-ink)"
+            >
+              <span
+                className="inline-block h-4 w-4 shrink-0 rounded border"
+                style={{
+                  backgroundColor: todo.completed
+                    ? "var(--lagoon)"
+                    : "transparent",
+                  borderColor: todo.completed ? "var(--lagoon)" : "var(--line)",
+                }}
+              />
+              <span className={todo.completed ? "line-through opacity-60" : ""}>
+                {todo.title}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  })();
 
   return (
     <main className="page-wrap px-4 pt-14 pb-8">
@@ -53,47 +105,7 @@ result.refetch()`}</pre>
           <QueryStateInspector result={result} />
         </div>
 
-        {showSpinner && (
-          <div className="flex items-center justify-center py-8">
-            <Loader2 className="h-8 w-8 animate-spin text-(--lagoon)" />
-          </div>
-        )}
-
-        {!showSpinner && result.isSuccess && result.data && (
-          <div className="island-shell rounded-xl p-4">
-            <h3
-              className="mb-3 text-sm font-semibold tracking-wide uppercase"
-              style={{ color: "var(--kicker)" }}
-            >
-              Todos ({result.data.length})
-            </h3>
-            <ul className="space-y-2">
-              {result.data.slice(0, 5).map((todo) => (
-                <li
-                  key={todo.id}
-                  className="flex items-center gap-2 text-sm text-(--sea-ink)"
-                >
-                  <span
-                    className="inline-block h-4 w-4 shrink-0 rounded border"
-                    style={{
-                      backgroundColor: todo.completed
-                        ? "var(--lagoon)"
-                        : "transparent",
-                      borderColor: todo.completed
-                        ? "var(--lagoon)"
-                        : "var(--line)",
-                    }}
-                  />
-                  <span
-                    className={todo.completed ? "line-through opacity-60" : ""}
-                  >
-                    {todo.title}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {dataSection}
       </section>
     </main>
   );
