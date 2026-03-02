@@ -1,7 +1,9 @@
 {
-  "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "ignorePatterns": [".output/**", ".tanstack/**", "src/routeTree.gen.ts"],
-  "sortTailwindcss": {
-    "stylesheet": "./src/styles.css"
-  }
+	"$schema": "./node_modules/oxfmt/configuration_schema.json",
+	"tabWidth": 2,
+	"useTabs": true,
+	"ignorePatterns": [".output/**", ".tanstack/**", "src/routeTree.gen.ts"],
+	"sortTailwindcss": {
+		"stylesheet": "./src/styles.css"
+	}
 }

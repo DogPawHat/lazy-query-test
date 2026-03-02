@@ -1,23 +1,66 @@
 {
-  "lsp": {
-    "tailwindcss-ls": {
-      "settings": {
-        "tailwindCSS": {
-          "experimental": {
-            "configFile": "src/styles.css"
-          },
-          "includeLanguages": {
-            "typescript": "javascript",
-            "typescriptreact": "javascript"
-          },
-          "classAttributes": [
-            "class",
-            "className",
-            "ngClass",
-            "class:list"
-          ]
-        }
-      }
-    }
-  }
+	"hard_tabs": true,
+	"tab_size": 2,
+	"languages": {
+		"JavaScript": {
+			"formatter": [
+				{
+					"language_server": {
+						"name": "oxfmt"
+					}
+				},
+				{
+					"code_action": "source.fixAll.oxc"
+				}
+			],
+			"language_servers": ["oxlint", "..."]
+		},
+		"TypeScript": {
+			"formatter": [
+				{
+					"language_server": {
+						"name": "oxfmt"
+					}
+				},
+				{
+					"code_action": "source.fixAll.oxc"
+				}
+			],
+			"language_servers": ["oxlint", "..."]
+		},
+		"TSX": {
+			"formatter": [
+				{
+					"language_server": {
+						"name": "oxfmt"
+					}
+				},
+				{
+					"code_action": "source.fixAll.oxc"
+				}
+			],
+			"language_servers": ["oxlint", "..."]
+		}
+	},
+	"lsp": {
+		"oxfmt": {
+			"initialization_options": {
+				"settings": {
+					"fmt.configPath": null
+				}
+			}
+		},
+		"oxlint": {
+			"initialization_options": {
+				"settings": {
+					"configPath": null,
+					"disableNestedConfig": false,
+					"fixKind": "safe_fix",
+					"run": "onType",
+					"typeAware": true,
+					"unusedDisableDirectives": "deny"
+				}
+			}
+		}
+	}
 }
