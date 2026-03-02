@@ -9,6 +9,9 @@ import { useThrottledLoading } from "../hooks/useThrottledLoading";
 
 export const Route = createFileRoute("/skip-token")({
 	component: SkipTokenDemo,
+	beforeLoad: ({ context }) => {
+		context.queryClient.clear();
+	},
 });
 
 function SkipTokenDemo() {

@@ -8,6 +8,9 @@ import { useThrottledLoading } from "../hooks/useThrottledLoading";
 
 export const Route = createFileRoute("/manual-fetch")({
 	component: ManualFetchDemo,
+	beforeLoad: ({ context }) => {
+		context.queryClient.clear();
+	},
 });
 
 function ManualFetchDemo() {

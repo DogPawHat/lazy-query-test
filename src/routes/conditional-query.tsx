@@ -10,6 +10,9 @@ import { useThrottledLoading } from "../hooks/useThrottledLoading";
 
 export const Route = createFileRoute("/conditional-query")({
 	component: ConditionalQueryDemo,
+	beforeLoad: ({ context }) => {
+		context.queryClient.clear();
+	},
 });
 
 function ConditionalQueryDemo() {
