@@ -95,28 +95,7 @@ result.refetch()`}</pre>
           </div>
         )}
 
-        <div className="mt-6 rounded-lg border border-(--line) bg-(--surface) p-4">
-          <h4 className="mb-2 text-sm font-semibold text-(--sea-ink)">
-            Key Insights
-          </h4>
-          <ul className="list-disc space-y-1 pl-4 text-xs text-(--sea-ink-soft)">
-            <li>
-              <code>isPending</code>: true when there's no data yet
-            </li>
-            <li>
-              <code>isLoading</code>: true when isPending + isFetching
-            </li>
-            <li>
-              <code>isFetching</code>: true during any fetch (including refetch)
-            </li>
-            <li>
-              <code>status</code>: "pending" | "error" | "success"
-            </li>
-            <li>
-              <code>fetchStatus</code>: "fetching" | "paused" | "idle"
-            </li>
-          </ul>
-        </div>
+
       </section>
     </main>
   );

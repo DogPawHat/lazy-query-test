@@ -121,30 +121,7 @@ const result = useQuery({
           </div>
         )}
 
-        <div className="mt-6 rounded-lg border border-(--line) bg-(--surface) p-4">
-          <h4 className="mb-2 text-sm font-semibold text-(--sea-ink)">
-            Key Insights
-          </h4>
-          <ul className="list-disc space-y-1 pl-4 text-xs text-(--sea-ink-soft)">
-            <li>
-              <code>skipToken</code> is a special value that tells React Query
-              to skip this query
-            </li>
-            <li>Unlike enabled: false, skipToken works at the queryFn level</li>
-            <li>
-              <code>refetch()</code> throws "Missing queryFn" error when
-              skipToken is active (use enabled: false if you need manual
-              refetch)
-            </li>
-            <li>
-              fetchStatus will be "idle" when skipped, status stays in previous
-              state
-            </li>
-            <li>
-              Useful for TypeScript type safety with optional query parameters
-            </li>
-          </ul>
-        </div>
+
       </section>
     </main>
   );

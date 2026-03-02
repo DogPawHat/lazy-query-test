@@ -107,23 +107,7 @@ const result = useQuery({
           </div>
         )}
 
-        <div className="mt-6 rounded-lg border border-(--line) bg-(--surface) p-4">
-          <h4 className="mb-2 text-sm font-semibold text-(--sea-ink)">
-            Key Insights
-          </h4>
-          <ul className="list-disc space-y-1 pl-4 text-xs text-(--sea-ink-soft)">
-            <li>
-              Query automatically enables/disables based on the enabled
-              condition
-            </li>
-            <li>When disabled, the query returns to idle state</li>
-            <li>Cached data is retained even when query is disabled</li>
-            <li>
-              Useful for dependent queries, search inputs, and conditional
-              fetching
-            </li>
-          </ul>
-        </div>
+
       </section>
     </main>
   );
