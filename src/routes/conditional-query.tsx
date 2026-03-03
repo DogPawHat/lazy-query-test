@@ -125,6 +125,17 @@ const result = useQuery({
 					<QueryStateInspector result={result} />
 				</div>
 
+				<div className="mb-6">
+					<button
+						onClick={() => {
+							void result.refetch();
+						}}
+						className="rounded-lg border border-(--line) bg-(--surface) px-4 py-2 text-sm font-medium text-(--sea-ink) transition hover:bg-(--link-bg-hover)"
+					>
+						Try refetch()
+					</button>
+				</div>
+
 				{dataSection}
 			</section>
 		</main>
