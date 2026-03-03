@@ -1,5 +1,6 @@
 {
   "name": "lazy-query-test",
+  "license": "MIT",
   "private": true,
   "type": "module",
   "imports": {

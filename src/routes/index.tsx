@@ -31,7 +31,7 @@ function App() {
 					Lazy Query Patterns
 				</h1>
 				<p className="mb-8 max-w-2xl text-base text-(--sea-ink-soft) sm:text-lg">
-					React Query queries that don't run automatically on mount. Learn how to control when data
+					TanStack Query queries that don't run automatically on mount. Learn how to control when data
 					fetching happens using the enabled option, refetch(), and skipToken.
 				</p>
 			</section>
@@ -50,14 +50,6 @@ function App() {
 				))}
 			</section>
 
-			<section className="island-shell mt-8 rounded-2xl p-6">
-				<p className="island-kicker mb-2">What are Lazy Queries?</p>
-				<p className="text-sm text-(--sea-ink-soft)">
-					By default, useQuery fetches data immediately when the component mounts. Lazy queries give
-					you control over when fetching happens — useful for user-triggered actions, conditional
-					dependencies, or avoiding unnecessary requests.
-				</p>
-			</section>
 		</main>
 	);
 }
