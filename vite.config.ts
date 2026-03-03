@@ -10,7 +10,7 @@ import netlify from "@netlify/vite-plugin-tanstack-start";
 
 const config = defineConfig({
 	plugins: [
-		devtools(),
+		devtools({ removeDevtoolsOnBuild: false }),
 		netlify(),
 		tsconfigPaths({ projects: ["./tsconfig.json"] }),
 		tailwindcss(),
