@@ -6,6 +6,7 @@
   "imports": {
     "#/*": "./src/*"
   },
+  "packageManager": "pnpm@10.30.3",
   "scripts": {
     "dev": "vite dev --port 3000",
     "build": "vite build",
